@@ -1,0 +1,38 @@
+# Spring AI MCP Server Configuration
+spring:
+  application:
+    name: mcp-database-server # Application name
+  ai:
+    mcp:
+      server:
+        # Identify your MCP server
+        name: "PostgresSchemaServer"
+        version: "1.0.0"
+
+  # Database Configuration (Replace password with your actual password)
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: Abcd1234 # Replace with the actual password for the 'postgres' user
+    driver-class-name: org.postgresql.Driver
+
+  # JPA Configuration (Optional, can be adjusted)
+  jpa:
+    hibernate:
+      ddl-auto: none # Don't automatically create/update schema
+    # Explicitly set the dialect for PostgreSQL
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: false # Set to true to log SQL queries
+
+# Logging Configuration (Example: Set log level for schema service)
+logging:
+  level:
+    com.weather.mcp.DatabaseSchemaService: DEBUG
+
+# Enable SSE transport (default for webflux starter)
+# stdio: false # Default is false, explicitly setting it just for clarity
+# Define SSE endpoints (defaults are usually fine)
+# sse-endpoint: /sse
+# sse-message-endpoint: /mcp/message 
